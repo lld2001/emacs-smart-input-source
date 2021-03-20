@@ -1024,7 +1024,8 @@ Only used for `terminal-focus-reporting'."
                    #'sis--respect-focus-change-advice)
 
        ;; enable terminal focus event
-       (unless (display-graphic-p)
+       (unless (or (daemonp)
+                   (display-graphic-p))
          (require 'terminal-focus-reporting)
          (terminal-focus-reporting-mode t)
          (advice-add 'handle-focus-in :after
